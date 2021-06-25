@@ -1,0 +1,46 @@
+
+<div class = "container"> 
+    <div>
+        <h1>Ingrese compras</h1>
+        <p>Código: <input type="text" class="form-control" [(ngModel)]="prod.codigo" ></p>
+        <p>Nombre: <input type="text" class="form-control" [(ngModel)]="prod.nombre" ></p>
+        <p>Cantidad: <input type="number"  class="form-control" [(ngModel)]="prod.cantidad" ></p>
+        <p>Precio <input type="number"  class="form-control" [(ngModel)]="prod.precio" ></p>
+    </div>
+    <p><button (click)="agregar()" class="btn btn-primary" >Agregar </button>
+       |  <button (click)="modificar()" class="btn btn-success">Modificar </button>
+    </p>
+    <br>
+    <hr>
+    <br>
+    <h2> Compras</h2>
+    <table border="1" class="table" *ngIf="verificarProductos(); else nohayproductos">
+        <thead>
+        <tr>
+            <td>Código</td>
+            <td>Nombre</td>
+            <td>Cantidad</td>
+            <td>Precio</td>
+            <td>Eliminar</td>
+            <td>Seleccionar</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let prod of productos">
+            <td> {{prod.codigo}}</td>
+            <td> {{prod.nombre}}</td>
+            <td> {{prod.cantidad}}</td>
+            <td> {{prod.precio}}</td>
+            <td> <button (click)="eliminar(prod)" class="btn btn-danger" >Eliminar</button></td>
+            <td> <button (click)="seleccionar(prod)" class="btn btn-info" >Seleccionar</button></td>
+        </tr>
+    </tbody>
+    </table>
+    <!-- Se salta la tabla debido a que no hay prodcutos -->
+    <ng-template #nohayproductos><p>No se han encontrado los productos</p></ng-template>
+    <p><button (click)="comprar()">Comprar </button></p>
+    <h4> Subtotal: {{subTotal | currency:'$'}}</h4>
+    <h4> iva: {{iva | currency:'$'}}</h4>
+    <h4> total: {{total | currency:'$'}}</h4>
+
+</div>
